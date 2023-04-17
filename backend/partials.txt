@@ -1,0 +1,8 @@
+<%- include('partials/_head.ejs') %>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+<%- include('partials/_nav.ejs') %>
+<%- include('partials/_header.ejs') %>
+
+<%- include('partials/_footer.ejs') %>
+</div>
+<%- include('partials/_scripts.ejs') %>

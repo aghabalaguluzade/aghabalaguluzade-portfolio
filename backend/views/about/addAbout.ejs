@@ -1,129 +1,262 @@
 <%- include('../partials/_head.ejs') %>
-<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
-<%- include('../partials/_nav.ejs') %>
-<%- include('../partials/_header.ejs') %>
-<main id="main-container">
-    <!-- Hero -->
-    <div class="bg-body-light">
-        <div class="content content-full">
-            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-                <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Haqqında</h1>
-                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Haqqında</li>
-                        <li class="breadcrumb-item active" aria-current="page">Əlavə et</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-    <!-- END Hero -->
+<%- include('../partials/_navbar.ejs') %>
+	<div class="page-content">
+	<%- include('../partials/_slidebar.ejs') %>
+		<div class="content-wrapper">
+			<div class="content-inner">
+				<!-- Page header -->
+				<div class="page-header page-header-light shadow">
+					<div class="page-header-content d-lg-flex">
+						<div class="d-flex">
+							<h4 class="page-title mb-0">
+								About - <span class="fw-normal">Əlavə et</span>
+							</h4>
 
-    <!-- Page Content -->
-    <div class="content">
-        <!-- Elements -->
-        <div class="block block-rounded">
-            <div class="block-content">
-                
-                <% if (message && error) { %>
-                    <div class="alert alert-danger">
-                      <p><%= message %></p>
-                      <ul>
-                        <% error.split('<br>').forEach(function(item) { %>
-                          <li><%= item %></li>
-                        <% }); %>
-                      </ul>
-                    </div>
-                <% } %>
+							<a href="#page_header" class="btn btn-light align-self-center d-lg-none border-transparent rounded-pill p-0 ms-auto collapsed" data-bs-toggle="collapse" aria-expanded="false">
+								<i class="ph-caret-down collapsible-indicator ph-sm m-1"></i>
+							</a>
+						</div>
 
-                <% if (messages && messages.length > 0) { %>
-                    <div class="alert alert-success"><%= messages[0] %></div>
-                  <% } %>
+					
+					</div>
+				</div>
+				<!-- /page header -->
+                    <!-- Content area -->
+                    <div class="content">
+
+                        <!-- Form inputs -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0">Add Blog</h5>
+                            </div>
+                            <div class="card-body">
+                                <% if (message && error) { %>
+                                <div class="alert alert-danger">
+                                    <p><%= message %></p>
+                                    <ul>
+                                        <% error.split('<br>').forEach(function(item) { %>
+                                        <li><%= item %></li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                                <% } %>
+                    
+                                <% if (messages && messages.length > 0) { %>
+                                <div class="alert alert-success"><%= messages[0] %></div>
+                                <% } %>
+
+                                
+                                <% for (let data of about) { %>
+
+                                    <% if (!data) { %>
+                                    
+
+                                    <form action="/about/add" method="POST" enctype="multipart/form-data">
+                                        <div class="mb-4">
+                                            <div class="row mb-3">
+                                                <label class="col-form-label col-lg-2">Email</label>
+                                                <div class="col-lg-10">
+                                                    <div class="form-floating">
+                                                        <input type="email" class="form-control" placeholder="Placeholder" name="email" />
+                                                        <label>Email daxil et...</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row mb-3">
+                                                <label class="col-form-label col-lg-2">Məkan</label>
+                                                <div class="col-lg-10">
+                                                    <div class="form-floating">
+                                                        <input type="text" class="form-control" placeholder="Placeholder" name="location" />
+                                                        <label>Məkan daxil et...</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row mb-3">
+                                                <label class="col-form-label col-lg-2">Telefon</label>
+                                                <div class="col-lg-10">
+                                                    <div class="form-floating">
+                                                        <input type="tel" class="form-control" placeholder="Placeholder" name="phone" />
+                                                        <label>Telefon daxil et...</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <div class="row mb-3">
+                                                <label class="col-form-label col-lg-2">Haqqımda</label>
+                                                <div class="col-lg-10">
+                                                    <div class="form-floating">
+                                                        <textarea class="form-control" id="editor" style="height: 100px;" name="description"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
                   
-                  <% for (let data of about) { %>
-                    
-                    <% if (data) { %>
-                    
-                        <form action="/about/add" method="POST" enctype="multipart/form-data">
-                            <div class="row push">
-                                <div class="col-lg-8 col-xl-12">
-                                    <div class="form-group">
-                                        <label for="example-email-input">Email</label>
-                                        <input type="email" class="form-control" id="example-email-input" name="email" placeholder="Email daxil et..." value="<%= data ? data.email : ''  %>" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-text-input">Məkan</label>
-                                        <input type="text" class="form-control" id="example-text-input" name="location" placeholder="Məkan daxil et..." value="<%= data ? data.location : '' %>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-password-input">Telefon</label>
-                                        <input type="tel" class="form-control" id="example-password-input" name="phone" placeholder="Telefon daxil et..." value="<%= data ? data.phone : '' %>" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="example-textarea-input">Haqqımda</label>
-                                        <textarea class="form-control" id="example-textarea-input" name="description" rows="4" placeholder="Textarea content.."><%= data?.description %></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <p><strong>Çari şəkil</strong></p>
-                                        <img src="<%= data ? data.photo : '' %>" style="width: 200px; height: 200px;" />
-                                        <br />
-                                        <label>File Input</label>
-                                        <div class="custom-file">
-                                            <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                            <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-custom" name="photo" />
-                                            <label class="custom-file-label" for="example-file-input-custom">Fayl Seç...</label>
+                                           <div class="row mb-3">
+                                                <label class="col-form-label col-lg-2">Şəkil</label>
+                                                <div class="col-lg-10">
+                                                     <div class="input-group">
+                                                          <input type="file" class="form-control" name="photo" />
+                                                          <span class="input-group-text">.jpg</span>
+                                                          <span class="input-group-text">.jpeg</span>
+                                                          <span class="input-group-text">.png</span>
+                                                          <span class="input-group-text">.webp</span>
+                                                     </div>
+                                                </div>
+                                           </div>
+                        
+                                            <div class="d-flex align-items-center justify-content-end">
+                                                <button type="submit" class="btn btn-primary">Add <i class="ph-paper-plane-tilt ms-2"></i></button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-hero-success float-right">Success</button>
-                                </div>
-                            </div>
-                        </form>
-            
-                <% }else { %>
+                                    </form>
 
-                <form action="/about/add" method="POST" enctype="multipart/form-data">
-                    <div class="row push">
-                        <div class="col-lg-8 col-xl-12">
-                            <div class="form-group">
-                                <label for="example-email-input">Email</label>
-                                <input type="email" class="form-control" id="example-email-input" name="email" placeholder="Email daxil et..." />
+
+
+                                    <% }else { %>
+
+                                        <form action="/about/add" method="POST" enctype="multipart/form-data">
+                                            <div class="mb-4">
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-lg-2">Email</label>
+                                                    <div class="col-lg-10">
+                                                        <div class="form-floating">
+                                                            <input type="email" class="form-control" placeholder="Placeholder" name="email" value="<%= data ? data.email : '' %>" />
+                                                            <label>Email daxil et...</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-lg-2">Məkan</label>
+                                                    <div class="col-lg-10">
+                                                        <div class="form-floating">
+                                                            <input type="text" class="form-control" placeholder="Placeholder" name="location" value="<%= data ? data.location : '' %>" />
+                                                            <label>Məkan daxil et...</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+        
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-lg-2">Telefon</label>
+                                                    <div class="col-lg-10">
+                                                        <div class="form-floating">
+                                                            <input type="tel" class="form-control" placeholder="Placeholder" name="phone" value="<%= data ? data.phone : '' %>" />
+                                                            <label>Telefon daxil et...</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="row mb-3">
+                                                    <label class="col-form-label col-lg-2">Haqqımda</label>
+                                                    <div class="col-lg-10">
+                                                        <div class="form-floating">
+                                                            <textarea class="form-control" id="editor" style="height: 100px;" name="description"><%= data?.description %></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                            
+                                                <div class="row mb-3">
+                                                    <span class="col-form-label col-lg-2">Çari foto</span>
+                                                    <div class="col-lg-10">
+                                                         <div class="form-floating">
+                                                              <img src="<%= data ? data.photo : '' %>" alt="profile photo" style="width:200px; height:200px;" />
+                                                         </div>
+                                                    </div>
+                                               </div>
+                      
+                                               <div class="row mb-3">
+                                                    <label class="col-form-label col-lg-2">Şəkil</label>
+                                                    <div class="col-lg-10">
+                                                         <div class="input-group">
+                                                              <input type="file" class="form-control" name="photo" />
+                                                              <span class="input-group-text">.jpg</span>
+                                                              <span class="input-group-text">.jpeg</span>
+                                                              <span class="input-group-text">.png</span>
+                                                              <span class="input-group-text">.webp</span>
+                                                         </div>
+                                                    </div>
+                                               </div>
+                            
+                                                <div class="d-flex align-items-center justify-content-end">
+                                                    <button type="submit" class="btn btn-primary">Add <i class="ph-paper-plane-tilt ms-2"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                            <% } %>
+                            <% } %>
+
                             </div>
-                            <div class="form-group">
-                                <label for="example-text-input">Məkan</label>
-                                <input type="text" class="form-control" id="example-text-input" name="location" placeholder="Məkan daxil et..." />
-                            </div>
-                            <div class="form-group">
-                                <label for="example-password-input">Telefon</label>
-                                <input type="tel" class="form-control" id="example-password-input" name="phone" placeholder="Telefon daxil et..." />
-                            </div>
-                            <div class="form-group">
-                                <label for="example-textarea-input">Haqqımda</label>
-                                <textarea class="form-control" id="example-textarea-input" name="description" rows="4" placeholder="Textarea content.."></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>File Input</label>
-                                <div class="custom-file">
-                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-custom" name="photo" />
-                                    <label class="custom-file-label" for="example-file-input-custom">Fayl Seç...</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-hero-success float-right">Success</button>
                         </div>
+                        <!-- /form inputs -->
+                    
                     </div>
-                </form>
-                
-                <% } %>
-
-                <% } %>
-
-            </div>
-        </div>
-        <!-- END Elements -->
-    </div>
-    <!-- END Page Content -->
-</main>
-<%- include('../partials/_footer.ejs') %>
-</div>
-</main>
-<%- include('../partials/_scripts.ejs') %>
+                    
+                    <!-- /content area -->
+                    <%- include('../partials/_footer.ejs') %>
+			</div>
+			<div class="btn-to-top"><button class="btn btn-secondary btn-icon rounded-pill" type="button"><i class="ph-arrow-up"></i></button></div>
+		</div>		
+	</div>
+    <script>
+        var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        tinymce.init({
+            selector: '#editor',
+            plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
+            imagetools_cors_hosts: ['picsum.photos'],
+            menubar: 'file edit view insert format tools table help',
+            toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent | numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen preview save print | insertfile image media template link anchor codesample | ltr rtl',
+            toolbar_sticky: true,
+            autosave_ask_before_unload: true,
+            autosave_interval: '30s',
+            autosave_prefix: '{path}{query}-{id}-',
+            autosave_restore_when_empty: false,
+            autosave_retention: '2m',
+            image_advtab: true,
+            link_list: [
+                { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+            ],
+            image_list: [
+                { title: 'My page 1', value: 'https://www.tiny.cloud' },
+                { title: 'My page 2', value: 'http://www.moxiecode.com' }
+            ],
+            image_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Some class', value: 'class-name' }
+            ],
+            importcss_append: true,
+            file_picker_callback: function (callback, value, meta) {
+                /* Provide file and text for the link dialog */
+                if (meta.filetype === 'file') {
+                    callback('https://www.google.com/logos/google.jpg', { text: 'My text' });
+                }
+                /* Provide image and alt text for the image dialog */
+                if (meta.filetype === 'image') {
+                    callback('https://www.google.com/logos/google.jpg', { alt: 'My alt text' });
+                }
+                /* Provide alternative source and posted for the media dialog */
+                if (meta.filetype === 'media') {
+                    callback('movie.mp4', { source2: 'alt.ogg', poster: 'https://www.google.com/logos/google.jpg' });
+                }
+            },
+            templates: [
+                { title: 'New Table', description: 'creates a new table', content: '<div class="mceTmpl"><table width="98%%" border="0" cellspacing="0" cellpadding="0"><tr><th scope="col"> </th><th scope="col"> </th></tr><tr><td> </td><td> </td></tr></table></div>' },
+                { title: 'Starting my story', description: 'A cure for writers block', content: 'Once upon a time...' },
+                { title: 'New list with dates', description: 'New List with dates', content: '<div class="mceTmpl"><span class="cdate">cdate</span><br /><span class="mdate">mdate</span><h2>My List</h2><ul><li></li><li></li></ul></div>' }
+            ],
+            template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
+            template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
+            height: 600,
+            image_caption: true,
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+            noneditable_noneditable_class: 'mceNonEditable',
+            toolbar_mode: 'sliding',
+            contextmenu: 'link image imagetools table',
+            skin: useDarkMode ? 'oxide-dark' : 'oxide',
+            content_css: useDarkMode ? 'dark' : 'default',
+            content_style: 'body { font-family:Arial,Helvetica,sans-serif; font-size:14px }'
+        });
+    </script>
+<%- include('../partials/_notifications.ejs') %>

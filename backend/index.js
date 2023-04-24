@@ -9,6 +9,7 @@ import session from 'express-session';
 //Routes
 import pageRouter from './routes/web/pageRouter.js';
 import aboutRoute from './routes/web/aboutRoute.js'; 
+import resumeRoute from './routes/web/resumeRoute.js';
 dotenv.config();
 connection();
 const app = express();
@@ -38,6 +39,7 @@ app.use(flash());
 // Web Routes
 app.use('/', pageRouter);
 app.use('/about', aboutRoute);
+app.use('/resume', resumeRoute);
 
 app.listen(process.env.PORT, () => {
      console.log(`Server is running on port ${process.env.PORT}`);

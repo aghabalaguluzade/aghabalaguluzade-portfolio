@@ -12,7 +12,6 @@ export const getAboutPage = async (req,res) => {
           messages: req.flash('success'),
           about
      });
-     console.log(about);
 };
 
 export const aboutAdd = async (req, res) => {
@@ -59,12 +58,12 @@ export const aboutAdd = async (req, res) => {
              use_filename: true,
              folder: 'portfolio',
            });
+           fs.unlinkSync(req.files.photo.tempFilePath);
            await cloudinary.uploader.destroy(existingAbout.image_id);
            existingAbout.photo = photoUpload.secure_url;
-           existingAbout.image_id = photoUpload.public_id
-         }
-         fs.unlinkSync(req.files.photo.tempFilePath);
-         await existingAbout.save();
+           existingAbout.image_id = photoUpload.public_id;
+          }
+          await existingAbout.save();
        } else {
          const photoUpload = await cloudinary.uploader.upload(req.files.photo.tempFilePath, {
            use_filename: true,

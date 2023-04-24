@@ -1,0 +1,67 @@
+<%- include('../partials/_head.ejs') %>
+<div id="page-container" class="sidebar-o sidebar-dark enable-page-overlay side-scroll page-header-fixed main-content-narrow">
+<%- include('../partials/_nav.ejs') %>
+<%- include('../partials/_header.ejs') %>
+<main id="main-container">
+    <!-- Hero -->
+    <div class="bg-body-light">
+        <div class="content content-full">
+            <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
+                <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Haqqında</h1>
+                <nav class="flex-sm-00-auto ml-sm-3" aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">Haqqında</li>
+                        <li class="breadcrumb-item active" aria-current="page">Əlavə et</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- END Hero -->
+
+    <!-- Page Content -->
+    <div class="content">
+        <!-- Elements -->
+        <div class="block block-rounded">
+            <div class="block-content">  
+                <form action="/about/add" method="POST" enctype="multipart/form-data">
+                    <div class="row push">
+                        <div class="col-lg-8 col-xl-12">
+                            <div class="form-group">
+                                <label for="example-email-input">Email</label>
+                                <input type="email" class="form-control" id="example-email-input" name="email" placeholder="Email daxil et..." />
+                            </div>
+                            <div class="form-group">
+                                <label for="example-text-input">Məkan</label>
+                                <input type="text" class="form-control" id="example-text-input" name="location" placeholder="Məkan daxil et..." />
+                            </div>
+                            <div class="form-group">
+                                <label for="example-password-input">Telefon</label>
+                                <input type="tel" class="form-control" id="example-password-input" name="phone" placeholder="Telefon daxil et..." />
+                            </div>
+                            <div class="form-group">
+                                <label for="example-textarea-input">Haqqımda</label>
+                                <textarea class="form-control" id="example-textarea-input" name="description" rows="4" placeholder="Textarea content.."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>File Input</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input js-custom-file-input-enabled" data-toggle="custom-file-input" id="example-file-input-custom" name="photo" />
+                                    <label class="custom-file-label" for="example-file-input-custom">Fayl Seç...</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-hero-success float-right">Success</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- END Elements -->
+    </div>
+    <!-- END Page Content -->
+</main>
+<%- include('../partials/_footer.ejs') %>
+</div>
+</main>
+<%- include('../partials/_scripts.ejs') %>
